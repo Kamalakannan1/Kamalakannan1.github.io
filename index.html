@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kamalakannan P, Data Engineer</title>
+  <meta name="description" content="Kamalakannan P is a data engineer at Genpact in Bengaluru. He builds Databricks and PySpark pipelines with data-quality checks at every layer.">
+  <meta name="theme-color" content="#E4E8EB">
+  <meta property="og:title" content="Kamalakannan P, Data Engineer">
+  <meta property="og:description" content="Pipelines that turn raw data into clean, analytics-ready datasets. Databricks, PySpark, Airflow, Delta Lake.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='19' width='26' height='8' fill='%239A5B33'/%3E%3Crect x='3' y='11' width='26' height='6' fill='%236E7F8E'/%3E%3Crect x='3' y='5' width='26' height='4' fill='%23D1A02B'/%3E%3C/svg%3E">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#top">Kamalakannan P</a>
+      <nav aria-label="Primary">
+        <ul class="nav">
+          <li><a href="#project">Project</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#toolkit">Toolkit</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <aside class="meter" aria-hidden="true">
+    <div class="meter-item meter-bronze" data-layer="bronze"><span>Bronze</span><i></i></div>
+    <div class="meter-item meter-silver" data-layer="silver"><span>Silver</span><i></i></div>
+    <div class="meter-item meter-gold" data-layer="gold"><span>Gold</span><i></i></div>
+  </aside>
+
+  <main id="main">
+    <div class="layer layer-bronze" data-layer="bronze">
+
+      <section class="hero" id="top">
+        <div class="wrap">
+          <h1 class="name">Kamalakannan P</h1>
+          <p class="lead">I'm a data engineer at Genpact in Bengaluru. I build pipelines that turn raw data into clean, analytics-ready datasets, and I validate it at every layer on the way.</p>
+          <div class="actions">
+            <a class="btn" href="#project">See my flagship project</a>
+            <a class="btn-ghost" href="Kamalakannan_CV.pdf" download>Download resume</a>
+          </div>
+
+          <figure class="pipe-block">
+            <div class="pipe" id="pipe-wrap">
+              <div class="zones" aria-hidden="true">
+                <div class="zone zone-bronze"><span class="zone-name">Bronze</span><span class="zone-note">Raw ingest</span></div>
+                <div class="zone zone-silver"><span class="zone-name">Silver</span><span class="zone-note">Validated and conformed</span></div>
+                <div class="zone zone-gold"><span class="zone-name">Gold</span><span class="zone-note">Ready for analytics</span></div>
+                <span class="gate-label gate-1">Schema check</span>
+                <span class="gate-label gate-2">Quality check</span>
+              </div>
+              <canvas id="pipe" aria-hidden="true"></canvas>
+            </div>
+
+            <div class="pipe-controls">
+              <button class="btn" id="inject" type="button">Send a bad record</button>
+              <p class="tally" aria-hidden="true">
+                <span>Accepted <b id="n-ok">0</b></span>
+                <span>Rejected <b id="n-bad">0</b></span>
+              </p>
+              <p class="log" id="log" aria-hidden="true">Records are flowing. Send a bad one and watch where it stops.</p>
+              <p class="sr-only" id="announce" role="status" aria-live="polite"></p>
+            </div>
+
+            <figcaption class="pipe-caption">A simulation of the Bronze, Silver and Gold layers I work with. The records are illustrative, not production data.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <div class="layer-head wrap">
+        <p class="layer-word layer-word-bronze" aria-hidden="true" data-word="Bronze" data-kind="bronze">Bronze</p>
+        <p class="layer-sub"><span class="sr-only">Bronze layer. </span>Raw evidence of what I've built and run. It starts messy and gets straightened out as you scroll.</p>
+      </div>
+
+      <section class="section project" id="project" aria-labelledby="project-h">
+        <div class="wrap">
+          <h2 class="project-title" id="project-h">Orders lakehouse with quality gates</h2>
+          <p class="project-lede">I built a PySpark pipeline that takes about a million messy order rows through Bronze, Silver and Gold. Bad rows go to a quarantine table with the rules they broke, and a quality gate stops the run if too many fail.</p>
+          <p class="project-lede">To measure it, I generated synthetic data with 68,521 known defects hidden in 900,000 orders. The pipeline caught every one and rejected no good orders. Nine tests cover the rules, the layers and the gate.</p>
+          <div class="actions">
+            <button class="btn" id="replay" type="button">Replay the run</button>
+            <a class="btn-ghost" href="https://github.com/Kamalakannan1/orders-lakehouse-quality-gates" rel="noopener">View the code on GitHub</a>
+          </div>
+          <p class="project-note">The data is synthetic, and every number below comes from one real run on a 2-core, 8 GB machine.</p>
+
+          <div class="proj-cols">
+            <div class="proj-left">
+              <h3 class="sub-h">Where every row went</h3>
+              <p class="panel-sub">1,020,510 rows landed across two batches.</p>
+              <div class="stack" id="stack" role="img" aria-label="Of 1,020,510 landed rows, 831,479 were valid, 120,510 were duplicates or superseded versions, and 68,521 were quarantined.">
+                <span class="seg seg-ok" style="--w:81.48%"></span>
+                <span class="seg seg-dup" style="--w:11.81%"></span>
+                <span class="seg seg-bad" style="--w:6.71%"></span>
+              </div>
+              <ul class="legend">
+                <li class="raw"><i class="sw sw-ok"></i><span>Valid, moved to Silver</span><b>831,479</b></li>
+                <li class="raw"><i class="sw sw-dup"></i><span>Duplicates or older versions, removed</span><b>120,510</b></li>
+                <li class="raw"><i class="sw sw-bad"></i><span>Quarantined with reasons</span><b>68,521</b></li>
+              </ul>
+
+              <ol class="stages" id="stages" aria-label="Pipeline stages">
+                <li class="stage is-done" data-stage="bronze"><span class="st-name">Bronze</span><span class="st-time">13.9 s</span><span class="st-what">1,020,510 rows kept as raw text. Batch 2 renamed a column and added another, and the schema check handled both.</span></li>
+                <li class="stage is-done" data-stage="silver_dimensions"><span class="st-name">Silver dimensions</span><span class="st-time">2.6 s</span><span class="st-what">20,000 customers and 2,000 products.</span></li>
+                <li class="stage is-done" data-stage="silver_orders"><span class="st-name">Silver orders</span><span class="st-time">26.0 s</span><span class="st-what">900,000 distinct orders checked against nine rules: 831,479 valid, 68,521 quarantined.</span></li>
+                <li class="stage is-done" data-stage="gate"><span class="st-name">Quality gate</span><span class="st-time"></span><span class="st-what">7.61% rejected against a 15% limit. Passed, so Gold was built.</span></li>
+                <li class="stage is-done" data-stage="gold"><span class="st-name">Gold</span><span class="st-time">7.2 s</span><span class="st-what">Four tables: daily revenue (365 rows), products (2,000), customers (20,000) and a quality scorecard (9).</span></li>
+                <li class="stage is-done" data-stage="evaluation"><span class="st-name">Scoring</span><span class="st-time">2.9 s</span><span class="st-what">Compared every verdict with the hidden truth.</span></li>
+              </ol>
+              <p class="stage-total"><span>Whole pipeline</span><span>52.6 s</span></p>
+            </div>
+
+            <div class="console-wrap">
+              <h3 class="sub-h">The run log</h3>
+              <pre class="console" id="console" tabindex="0" aria-label="Log from the pipeline run">The log needs JavaScript. The full file is results/run.log in the repository.</pre>
+            </div>
+          </div>
+
+          <div class="proj-block">
+            <h3 class="sub-h">Why orders were quarantined</h3>
+            <p class="panel-sub">One order can break more than one rule, so the counts add up to more than 68,521.</p>
+            <ul class="ledger ledger-bad" id="rules"></ul>
+          </div>
+
+          <div class="proj-block">
+            <h3 class="sub-h">Scored against the hidden truth</h3>
+            <p class="panel-sub">The generator wrote down every defect it injected, so each verdict can be checked.</p>
+            <dl class="score">
+              <div><dt>Orders with a hidden defect</dt><dd>68,521</dd></div>
+              <div><dt>Caught and quarantined</dt><dd>68,521</dd></div>
+              <div><dt>Missed</dt><dd>0</dd></div>
+              <div><dt>Good orders wrongly rejected</dt><dd>0</dd></div>
+            </dl>
+          </div>
+
+          <div class="proj-block">
+            <h3 class="sub-h">What Gold serves</h3>
+            <div class="gold-cols">
+              <div>
+                <p class="panel-sub">Net revenue per month, in rupees crore.</p>
+                <div class="chart" id="chart"></div>
+                <p class="chart-cap">Synthetic orders, converted to INR at fixed illustrative rates. Cancelled orders are excluded and returns are subtracted.</p>
+              </div>
+              <div>
+                <p class="panel-sub">Top five products by net revenue.</p>
+                <div class="table-wrap">
+                  <table class="data">
+                    <thead><tr><th scope="col">Product</th><th scope="col" class="num">Orders</th><th scope="col" class="num">Net, lakh</th><th scope="col" class="num">Returns</th></tr></thead>
+                    <tbody id="products"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-block">
+            <h3 class="sub-h">What a quarantined order looks like</h3>
+            <p class="panel-sub">Rejected rows keep their original values, so someone can fix the source and reprocess them.</p>
+            <ul class="rejects" id="rejects"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="scale" aria-labelledby="scale-h">
+        <div class="wrap split">
+          <div class="split-head">
+            <h2 id="scale-h">A greenfield migration, at enterprise scale</h2>
+          </div>
+          <div class="split-body">
+            <p>At Genpact I contributed to a greenfield enterprise migration, moving from Greenplum to Databricks and modernizing Talend EDL jobs. The transition was designed to minimize user impact. These are the programme's overall figures.</p>
+            <ul class="ledger">
+              <li class="ledger-row raw" style="--w:100%"><span class="ledger-label">Database objects</span><span class="ledger-bar" aria-hidden="true"></span><span class="ledger-count">45,000+</span></li>
+              <li class="ledger-row raw" style="--w:44.4%"><span class="ledger-label">Tables</span><span class="ledger-bar" aria-hidden="true"></span><span class="ledger-count">20,000+</span></li>
+              <li class="ledger-row raw" style="--w:33.3%"><span class="ledger-label">Jobs</span><span class="ledger-bar" aria-hidden="true"></span><span class="ledger-count">15,000+</span></li>
+              <li class="ledger-row raw" style="--w:6.7%"><span class="ledger-label">Reports</span><span class="ledger-bar" aria-hidden="true"></span><span class="ledger-count">3,000+</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="gate" aria-hidden="true"><div class="wrap gate-inner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg><span>Schema check passed</span></div></div>
+
+    <div class="layer layer-silver" data-layer="silver">
+      <div class="layer-head wrap">
+        <p class="layer-word layer-word-silver" aria-hidden="true" data-word="Silver" data-kind="silver">Silver</p>
+        <p class="layer-sub"><span class="sr-only">Silver layer. </span>Validated and conformed: where I've worked and how.</p>
+      </div>
+
+      <section class="section" id="work" aria-labelledby="work-h">
+        <div class="wrap split">
+          <div class="split-head">
+            <h2 id="work-h">Selected work</h2>
+          </div>
+          <div class="split-body">
+            <article class="piece">
+              <h3>Greenplum to Databricks migration</h3>
+              <p>Supported the move from Greenplum to Databricks and the modernization of Talend EDL jobs, helping keep data consistent across processing workflows throughout the programme.</p>
+              <p class="stack-line">Databricks, Greenplum, Talend, PySpark</p>
+            </article>
+            <article class="piece">
+              <h3>Medallion architecture pipelines</h3>
+              <p>Built batch ETL and ELT pipelines that ingest, transform, validate and deliver data in Bronze, Silver and Gold layers. Schema checks and data-quality validations keep downstream datasets reliable.</p>
+              <p class="stack-line">Databricks, Delta Lake, PySpark, Spark SQL, Python</p>
+            </article>
+            <article class="piece">
+              <h3>Pipeline reliability with Airflow</h3>
+              <p>Orchestrated workflows in Apache Airflow, monitored runs, investigated failures, and set up retries and alerts so a failed run recovers and data delivery stays dependable.</p>
+              <p class="stack-line">Apache Airflow, Python, pipeline monitoring</p>
+            </article>
+            <article class="piece">
+              <h3>KPI dashboards during my internship</h3>
+              <p>Delivered 5+ analytics and visualization projects with dashboards covering 10+ business KPIs. I worked with the team to validate KPI calculations and tightened the accuracy of the outputs.</p>
+              <p class="stack-line">Python, Power BI, Advanced Excel</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="experience" aria-labelledby="exp-h">
+        <div class="wrap split">
+          <div class="split-head">
+            <h2 id="exp-h">Experience</h2>
+          </div>
+          <div class="split-body">
+            <ol class="timeline">
+              <li class="stop">
+                <p class="when">Oct 2024 to present</p>
+                <h3>Data Engineer, Genpact</h3>
+                <p class="where">Data &amp; Analytics, Bengaluru</p>
+                <ul class="plain">
+                  <li>Develop batch ETL and ELT pipelines in Python, PySpark, Spark SQL and Databricks for downstream analytics and reporting.</li>
+                  <li>Implement Medallion Architecture workflows with schema checks and data-quality validations.</li>
+                  <li>Orchestrate and monitor workflows in Apache Airflow, investigating failures and using retries and alerts to recover.</li>
+                  <li>Work with cross-functional teams to clarify requirements and troubleshoot, and I apply code-review feedback to build reusable engineering practices.</li>
+                </ul>
+              </li>
+              <li class="stop">
+                <p class="when">Feb 2024 to Jul 2024</p>
+                <h3>Data / AI Intern, Genpact</h3>
+                <p class="where">Bengaluru</p>
+                <ul class="plain">
+                  <li>Delivered 5+ analytics and visualization projects using Python, Power BI and Advanced Excel.</li>
+                  <li>Cleaned, transformed and validated data in Python and Excel to prepare reliable datasets for reporting.</li>
+                </ul>
+              </li>
+              <li class="stop">
+                <p class="when">2020 to 2024</p>
+                <h3>B.Tech in Computer Science &amp; Engineering</h3>
+                <p class="where">Kalasalingam Academy of Research and Education, CGPA 9.2/10</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="gate" aria-hidden="true"><div class="wrap gate-inner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg><span>Quality check passed</span></div></div>
+
+    <div class="layer layer-gold" data-layer="gold">
+      <div class="layer-head wrap">
+        <p class="layer-word layer-word-gold" aria-hidden="true" data-word="Gold" data-kind="gold">Gold</p>
+        <p class="layer-sub"><span class="sr-only">Gold layer. </span>Ready to use: my tools, my credentials, and how to reach me.</p>
+      </div>
+
+      <section class="section" id="toolkit" aria-labelledby="tool-h">
+        <div class="wrap split">
+          <div class="split-head">
+            <h2 id="tool-h">Toolkit and certifications</h2>
+          </div>
+          <div class="split-body">
+            <dl class="toolkit">
+              <div><dt>Programming</dt><dd>Python, SQL, PySpark, Spark SQL</dd></div>
+              <div><dt>Data engineering</dt><dd>ETL and ELT pipelines, ingestion, transformation, validation, data quality</dd></div>
+              <div><dt>Lakehouse and platforms</dt><dd>Databricks, Delta Lake, Medallion Architecture, Unity Catalog, Greenplum, Microsoft Fabric</dd></div>
+              <div><dt>Big data</dt><dd>Apache Spark, Hadoop, HDFS, Hive, YARN, MapReduce</dd></div>
+              <div><dt>Databases and cloud</dt><dd>PostgreSQL, MySQL, AWS</dd></div>
+              <div><dt>Orchestration and tools</dt><dd>Apache Airflow, Talend, Git, pipeline monitoring, debugging</dd></div>
+              <div><dt>Analytics and reporting</dt><dd>Pandas, NumPy, Power BI, Advanced Excel, KPI reporting</dd></div>
+            </dl>
+
+            <h3 class="sub">Certifications</h3>
+            <ul class="certs">
+              <li><span>Databricks Data Engineering Professional</span><span class="yr">2025</span></li>
+              <li><span>AWS Certified Data Engineer, Associate</span><span class="yr">2025</span></li>
+              <li><span>Microsoft Fabric Data Engineer Associate</span><span class="yr">2025</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="writing" aria-labelledby="pub-h">
+        <div class="wrap split">
+          <div class="split-head">
+            <h2 id="pub-h">Publications</h2>
+          </div>
+          <div class="split-body">
+            <p>Two machine learning papers from my undergraduate years.</p>
+            <ul class="papers">
+              <li>Analysis on Forecasting of Loan using Supervised Machine Learning Models</li>
+              <li>Customer Segmentation Analysis leveraging Machine Learning Algorithms</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact" id="contact" aria-labelledby="contact-h">
+        <div class="wrap">
+          <h2 class="contact-title" id="contact-h">Open to new data engineering roles</h2>
+          <a class="mega" href="mailto:kamalakannan200336@gmail.com">kamalakannan200336@gmail.com</a>
+          <p class="contact-lede">Email is the quickest way to reach me. I'm based in Bengaluru.</p>
+          <ul class="links">
+            <li><a href="https://www.linkedin.com/in/kamalakannan200336" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://github.com/Kamalakannan1" rel="noopener">GitHub</a></li>
+          </ul>
+          <a class="btn" href="Kamalakannan_CV.pdf" download>Download resume (PDF)</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap"><p>&copy; 2026 Kamalakannan P</p></div>
+  </footer>
+
+  <script src="run-data.js"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
