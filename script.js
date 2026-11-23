@@ -539,7 +539,9 @@
         if (r.top <= y && r.bottom > y) cur = l.getAttribute('data-layer');
       });
       Array.prototype.forEach.call(items, function (it) {
-        it.classList.toggle('is-active', it.getAttribute('data-layer') === cur);
+        var on = it.getAttribute('data-layer') === cur;
+        it.classList.toggle('is-active', on);
+        if (on) it.setAttribute('aria-current', 'true'); else it.removeAttribute('aria-current');
       });
     }
     function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }

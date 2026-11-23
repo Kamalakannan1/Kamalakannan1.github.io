@@ -154,7 +154,8 @@ a:hover { text-decoration-thickness: 2px; }
   z-index: 15; display: none; flex-direction: column; gap: 0.9rem;
   font-family: var(--display); font-size: 0.85rem;
 }
-.meter-item { display: flex; align-items: center; justify-content: flex-end; gap: 0.55rem; color: var(--muted); }
+.meter-item { display: flex; align-items: center; justify-content: flex-end; gap: 0.55rem; color: var(--muted); text-decoration: none; padding: 0.15rem 0.2rem; }
+.meter-item:hover span { text-decoration: underline; text-decoration-thickness: 2px; color: var(--ink); }
 .meter-item i { width: 0.8rem; height: 0.8rem; border-radius: 2px; border: 2px solid currentColor; flex: none; }
 .meter-item.is-active { color: var(--ink); font-weight: 700; }
 .meter-item.is-active i { background: var(--m, var(--ink)); border-color: var(--ink); }
